@@ -12,23 +12,25 @@ const App = () => {
   const todos = useAppSelector((state) => state.todos.todos);
   return (
     <BrowserRouter>
-    <Routes>
-      <Route path="one" element={<Registration />} />
-      <Route path="two" element={<Login/>} />
-    </Routes>
-  </BrowserRouter>
-    
+      <Routes>
+        <Route path="auth/sign-up" element={<Registration />} />
+        <Route path="auth/sign-in" element={<Login />} />
+        <Route
+          path="todos"
+          element={
+            <div className="App">
+              <GlobalStyles />
+              <StyleForAllProject>
+                <Input />
+                <Todos />
+                {todos.length > 0 ? <Footer /> : null}
+              </StyleForAllProject>
+            </div>
+          }
+        />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
 export default App;
-
-
-    // <div className="App">
-    //   <GlobalStyles />
-    //   <StyleForAllProject>
-    //     <Input />
-    //     <Todos />
-    //     {todos.length > 0 ? <Footer /> : null}
-    //   </StyleForAllProject>
-    // </div>
