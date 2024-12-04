@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { InputRegistrationUser } from "./styles/style";
 
 interface IInputRegistration{
   type: string;
@@ -9,7 +10,7 @@ interface IInputRegistration{
 
 const InputRegistration: React.FC<IInputRegistration> = ({type, placeholder, setFunction, f}) => {
   return (
-    <input
+    <InputRegistrationUser
       className="input"
       type={type}
       placeholder={placeholder}

@@ -1,6 +1,5 @@
 import axios from "axios";
 interface IAxiosPost {
-    url: string;
     email: string;
     password: string;
 }
@@ -10,9 +9,9 @@ interface IAxiosResponse {
     user: { id: number; fullName: string; email: string; dob: string; };
 }
 
-export const axiosPost = async ({ url, email, password }: IAxiosPost): Promise<IAxiosResponse> => {
+export const axiosPostRegistrationUser = async ({email, password }: IAxiosPost): Promise<IAxiosResponse> => {
     try {
-        const response = await axios.post<IAxiosResponse>(url, {
+        const response = await axios.post<IAxiosResponse>('http://localhost:4000/auth/sign-in', {
             email,
             password,
         });

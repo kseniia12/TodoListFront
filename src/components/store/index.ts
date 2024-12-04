@@ -1,11 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 import todoSlice from "./todoSlice";
 import filterSlice from "./filterSlice";
+import userSlice from "./userSlice";
 
 const store = configureStore({
   reducer: {
     todos: todoSlice,
     filters: filterSlice,
+    users: userSlice,
   },
 });
 

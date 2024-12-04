@@ -136,3 +136,14 @@ export const TodoList = styled.div`
     width: 30px;
   }
 `;
+
+export const FormSection = styled.form`
+display: flex;
+flex-direction: column;
+`;
+
+
+export const InputRegistrationUser = styled.input`
+
+`;
+

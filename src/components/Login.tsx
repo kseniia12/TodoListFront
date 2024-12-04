@@ -1,22 +1,21 @@
 import React, { useState } from "react";
 import InputRegistration from "./InputRegistration";
 import ButtonRegistration from "./ButtonRegistration";
-import { axiosPost } from "../API/auchAPI";
+import { thunkCreateUser } from "./store/thunk";
+import { useAppDispatch } from "../hooks";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
-
+  const dispatch = useAppDispatch();;
   const handleSubmit = async (
     e: React.FormEvent<HTMLFormElement>
   ): Promise<void> => {
     e.preventDefault();
-    let getDataUsersFromServer = await axiosPost({
-      url: 'http://localhost:4000/auth/sign-in',
+    dispatch(thunkCreateUser({
       email,
       password,
-    });
-    localStorage.setItem('token', getDataUsersFromServer.token);
+    }));
   };
   return (
     <form onSubmit={handleSubmit}>
