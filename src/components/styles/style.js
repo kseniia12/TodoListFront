@@ -137,13 +137,33 @@ export const TodoList = styled.div`
   }
 `;
 
-export const FormSection = styled.form`
-display: flex;
-flex-direction: column;
+export const FormSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
 `;
-
+export const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
 
 export const InputRegistrationUser = styled.input`
-
+  max-height: 30px;
+  width: 300px;
+  padding: 10px;
+  background-color: #cbf1f5;
+  display: block;
 `;
 
+export const ButtonRegistrationAndLogin = styled.button`
+  max-height: 30px;
+  width: 150px;
+  padding: 10px;
+  background-color: #a3d2d6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;

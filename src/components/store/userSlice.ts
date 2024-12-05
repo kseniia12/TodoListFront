@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
-import { thunkCreateUser } from "./thunk";
+import { thunkCreateUser, thunkLoginUser } from "./thunk";
 export interface IUser {
     id: number;
     fullName: string;
@@ -31,6 +31,11 @@ const userSlice = createSlice({
     },
     extraReducers: (builder) => {
         builder
+            .addCase(thunkLoginUser.fulfilled, (state, action: PayloadAction<{ user: IUser, token: string}>) => {
+                state.users.push(action.payload.user);
+                localStorage.setItem('token', action.payload.token);
+                state.loadingStatus = 'succeeded';
+            })
             .addCase(thunkCreateUser.pending, (state) => {
                 state.loadingStatus = 'loading';
                 state.error = null;
