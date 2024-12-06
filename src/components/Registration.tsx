@@ -23,6 +23,7 @@ const Registration = () => {
       dob,
     }));
   };
+  navigate("/todos");
   return (
     <FormSection>
       <h1>Регистрация</h1>

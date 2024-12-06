@@ -24,7 +24,6 @@ export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): 
             email,
             password,
         });
-        console.log("log")
         return response.data;
     } catch (error) {
         throw new Error("Request failed");
@@ -44,9 +43,7 @@ export const axiosPostRegistrationUser = async ({
             password,
             dob
         });
-        console.log("reg")
         return response.data;
-    
     } catch (error) {
         throw new Error("Request failed");
     }

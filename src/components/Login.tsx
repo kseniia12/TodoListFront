@@ -24,7 +24,7 @@ const Login = () => {
         password,
       })
     );
-    // navigate("/todos");
+    navigate("/todos");
   };
   return (
     <FormSection>
