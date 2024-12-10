@@ -18,20 +18,6 @@ interface IAxiosResponse {
   user: { id: number; fullName: string; email: string; dob: string; };
 }
 
-export const thunkLoginUser = createAsyncThunk<IAxiosResponse, IAxiosPostLogin>(
-  'users/loginUser',
-  async ({
-    email,
-    password,
-  }: IAxiosPostLogin): Promise<IAxiosResponse> => {
-    const response = await axiosPostLoginUser({
-      email,
-      password,
-    });
-    return response;
-  }
-);
-
 export const thunkCreateUser = createAsyncThunk<IAxiosResponse, IAxiosPostRegistration>(
   'users/createUser',
   async ({
@@ -45,6 +31,20 @@ export const thunkCreateUser = createAsyncThunk<IAxiosResponse, IAxiosPostRegist
       email,
       password,
       dob
+    });
+    return response;
+  }
+);
+
+export const thunkLoginUser = createAsyncThunk<IAxiosResponse, IAxiosPostLogin>(
+  'users/loginUser',
+  async ({
+    email,
+    password,
+  }: IAxiosPostLogin): Promise<IAxiosResponse> => {
+    const response = await axiosPostLoginUser({
+      email,
+      password,
     });
     return response;
   }

@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 import { TodoList } from "./styles/style";
 import { useAppDispatch } from "../hooks";
-import { completeTodo, deleteTodo, editTodo } from "./store/todoSlice";
+// import { completeTodo, deleteTodo, editTodo } from "./store/todoSlice";
 import cn from "classnames";
 
 interface ComponentProps {
-  id: string;
+  id: number;
   todo: string;
   completedTask: boolean;
 }
@@ -17,13 +17,13 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const dispatch = useAppDispatch();
 
-  const completeTask = (id: string) => {
-    dispatch(completeTodo(id));
-  };
+  // const completeTask = (id: number) => {
+  //   dispatch(completeTodo(id));
+  // };
 
-  const deleteTask = (id: string) => {
-    dispatch(deleteTodo(id));
-  };
+  // const deleteTask = (id: number) => {
+  //   dispatch(deleteTodo(id));
+  // };
 
   const handleDoubleClick = (
     e: React.MouseEvent<Element, MouseEvent>
@@ -38,7 +38,7 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
     if (e.key === "Enter") {
       setMouseOver(true);
       e.preventDefault();
-      dispatch(editTodo({ id, valueInputField }));
+      // dispatch(editTodo({ id, valueInputField }));
       setIsInputFocused(false);
       setStyleTodosList(false);
     }
@@ -62,7 +62,7 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
             "completed-task": completedTask,
             "unfulfilled-task": !completedTask,
           })}
-          onClick={() => completeTask(id)}
+          // onClick={() => completeTask(id)}
         ></div>
         {styleTodosList === true ? (
           <input
@@ -87,7 +87,7 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
           "no-activ-cross": !mouseOver,
           "activ-cross": mouseOver,
         })}
-        onClick={() => deleteTask(id)}
+        // onClick={() => deleteTask(id)}
       >
         x
       </div>

@@ -3,16 +3,23 @@ import { useState } from "react";
 import { addTodo, markAllTasksCompleted } from "./store/todoSlice";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import cn from "classnames";
+import { thunkCreateTodo } from "../components/store/thunkTodo";
 const Input = () => {
-  const [todo, setTodo] = useState<string>("");
+  const [text, setTodo] = useState<string>("");
+  const [completed, setCompleted] = useState<boolean>(false);
   const todos = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
 
   const addTask = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (todo.trim().length) {
-      dispatch(addTodo(todo));
+    if (text.trim().length) {
+      dispatch(
+        thunkCreateTodo({
+          text,
+          completed,
+        })
+      );
     }
     setTodo("");
   };
@@ -50,7 +57,7 @@ const Input = () => {
             className="input"
             type="text"
             placeholder="What needs to be done?"
-            value={todo}
+            value={text}
             onChange={(e) => setTodo(e.target.value)}
             onFocus={handleInputFocus}
             onBlur={handleInputBlur}

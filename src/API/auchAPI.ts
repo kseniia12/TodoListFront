@@ -1,4 +1,3 @@
-import axios from "axios";
 import constantForAxios from "../constant/constant";
 import { axiosDefault } from "../axiosDefault";
 interface IAxiosPostLogin {
@@ -17,18 +16,6 @@ interface IAxiosResponse {
     token: string;
     user: { id: number; fullName: string; email: string; dob: string; };
 }
-
-export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): Promise<IAxiosResponse> => {
-    try {
-        const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.login, {
-            email,
-            password,
-        });
-        return response.data;
-    } catch (error) {
-        throw new Error("Request failed");
-    }
-};
 
 export const axiosPostRegistrationUser = async ({
     fullName,
@@ -49,3 +36,14 @@ export const axiosPostRegistrationUser = async ({
     }
 };
 
+export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): Promise<IAxiosResponse> => {
+    try {
+        const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.login, {
+            email,
+            password,
+        });
+        return response.data;
+    } catch (error) {
+        throw new Error("Request failed");
+    }
+};

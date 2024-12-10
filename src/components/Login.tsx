@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import InputRegistration from "./InputRegistration";
 import ButtonRegistration from "./ButtonRegistration";
 import { thunkLoginUser } from "./store/thunk";
-import { useAppDispatch, useAppSelector } from "../hooks";
+import { useAppDispatch } from "../hooks";
 import { Form, FormSection } from "./styles/style";
 import { useNavigate } from "react-router";
 
 const Login = () => {
-  const users = useAppSelector((state) => state.users.loadingStatus);
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
 
