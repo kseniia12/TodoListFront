@@ -1,12 +1,12 @@
 import React from "react";
 import { useState } from "react";
-import { addTodo, markAllTasksCompleted } from "./store/todoSlice";
+import { markAllTasksCompleted } from "./store/todoSlice";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import cn from "classnames";
 import { thunkCreateTodo } from "../components/store/thunkTodo";
 const Input = () => {
   const [text, setTodo] = useState<string>("");
-  const [completed, setCompleted] = useState<boolean>(false);
+  const [completed] = useState<boolean>(false);
   const todos = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);

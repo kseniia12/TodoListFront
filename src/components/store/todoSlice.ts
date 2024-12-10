@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction, SerializedError } from "@reduxjs/toolkit";
 import uuid from 'react-uuid';
-import { thunkCreateTodo } from "./thunkTodo";
+import { thunkCompletedTodo, thunkCreateTodo, thunkDeleteTodo, thunkEditTodo, thunkGetAllTodo } from "./thunkTodo";
 
 export interface ITodo {
   id: number;
@@ -8,15 +8,17 @@ export interface ITodo {
   completed: boolean
 }
 
+export interface ITodoCr {
+  id: number;
+  text: string
+  completed: boolean,
+  valueInputField: string
+}
+
 export interface IStateTodos {
   todos: ITodo[];
   loadingStatus: 'idle' | 'loading' | 'succeeded' | 'failed';
   error: SerializedError | null;
-}
-
-interface IEditTodo {
-  id: number;
-  valueInputField: string;
 }
 
 const initialState: IStateTodos = {
@@ -30,13 +32,13 @@ const todoSlice = createSlice({
   name: "todos",
   initialState,
   reducers: {
-    addTodo(state, action) {
-      state.todos.push({
-        id: Number(uuid()),
-        text: action.payload,
-        completed: false,
-      });
-    },
+    // addTodo(state, action) {
+    //   state.todos.push({
+    //     id: Number(uuid()),
+    //     text: action.payload,
+    //     completed: false,
+    //   });
+    // },
     // completeTodo(state, action: PayloadAction<string>) {
     //   const id = action.payload;
     //   const index = state.todos.findIndex((todo) => todo.id === id);
@@ -80,13 +82,40 @@ const todoSlice = createSlice({
       .addCase(thunkCreateTodo.rejected, (state, action) => {
         state.loadingStatus = 'failed';
         state.error = action.error as SerializedError;
-      });
+      })
+      .addCase(thunkEditTodo.fulfilled, (state, action: PayloadAction<{ todo: ITodoCr }>) => {
+        const id = action.payload.todo.id;
+        const index = state.todos.findIndex((todo) => todo.id === id);
+        if (index === -1) {
+          return;
+        }
+        state.todos[index].text = action.payload.todo.valueInputField;
+        state.loadingStatus = 'succeeded';
+      })
+      .addCase(thunkDeleteTodo.fulfilled, (state, action: PayloadAction<{ todo: ITodo[] }>) => {
+        state.todos = action.payload.todo
+        state.loadingStatus = 'succeeded';
+      })
+      .addCase(thunkCompletedTodo.fulfilled, (state, action: PayloadAction<{ todo: ITodo }>) => {
+        const id = action.payload.todo.id;
+          const index = state.todos.findIndex((todo) => todo.id === id);
+          if (index === -1) {
+            return;
+          }
+          state.todos[index].completed = !state.todos[index].completed;
+        state.loadingStatus = 'succeeded';
+      })
+      .addCase(thunkGetAllTodo.fulfilled, (state, action: PayloadAction<{ todo: ITodo[] }>) => {
+        state.todos = action.payload.todo
+        state.loadingStatus = 'succeeded';
+      })
+
 
   },
 });
 
 export const {
-  addTodo,
+  // addTodo,
   // completeTodo,
   deleteTodo,
   markAllTasksCompleted,

@@ -1,10 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Todo from "./Todo";
-import { useAppSelector } from "../hooks";
+import { useAppDispatch, useAppSelector } from "../hooks";
 import selectTodosByFilter from "./store/reselect";
+import { thunkGetAllTodo } from "./store/thunkTodo";
 
 const Todos = () => {
-  const todos = useAppSelector(selectTodosByFilter);
+  const todos = useAppSelector((state)=>state.todos.todos);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(thunkGetAllTodo())
+  }, [dispatch]);
   return (
     <div>
       {todos?.map((todo) => (

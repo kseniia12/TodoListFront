@@ -3,6 +3,7 @@ import { TodoList } from "./styles/style";
 import { useAppDispatch } from "../hooks";
 // import { completeTodo, deleteTodo, editTodo } from "./store/todoSlice";
 import cn from "classnames";
+import { thunkCompletedTodo, thunkDeleteTodo, thunkEditTodo } from "./store/thunkTodo";
 
 interface ComponentProps {
   id: number;
@@ -16,14 +17,14 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
   const [valueInputField, setValueInputField] = useState(todo);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const dispatch = useAppDispatch();
+  let completed = !completedTask
+  const completeTask = (id: number) => {
+    dispatch(thunkCompletedTodo({id, completed}));
+  };
 
-  // const completeTask = (id: number) => {
-  //   dispatch(completeTodo(id));
-  // };
-
-  // const deleteTask = (id: number) => {
-  //   dispatch(deleteTodo(id));
-  // };
+  const deleteTask = (id: number) => {
+    dispatch(thunkDeleteTodo({id}));
+  };
 
   const handleDoubleClick = (
     e: React.MouseEvent<Element, MouseEvent>
@@ -38,7 +39,7 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
     if (e.key === "Enter") {
       setMouseOver(true);
       e.preventDefault();
-      // dispatch(editTodo({ id, valueInputField }));
+      dispatch(thunkEditTodo({ id, valueInputField }));
       setIsInputFocused(false);
       setStyleTodosList(false);
     }
@@ -62,7 +63,7 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
             "completed-task": completedTask,
             "unfulfilled-task": !completedTask,
           })}
-          // onClick={() => completeTask(id)}
+          onClick={() => completeTask(id)}
         ></div>
         {styleTodosList === true ? (
           <input
@@ -87,7 +88,7 @@ const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
           "no-activ-cross": !mouseOver,
           "activ-cross": mouseOver,
         })}
-        // onClick={() => deleteTask(id)}
+        onClick={() => deleteTask(id)}
       >
         x
       </div>
