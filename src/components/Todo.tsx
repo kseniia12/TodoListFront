@@ -1,17 +1,13 @@
 import React, { useState } from "react";
 import { TodoList } from "./styles/style";
 import { useAppDispatch } from "../hooks";
-// import { completeTodo, deleteTodo, editTodo } from "./store/todoSlice";
 import cn from "classnames";
 import { thunkCompletedTodo, thunkDeleteTodo, thunkEditTodo } from "./store/thunkTodo";
+import { ComponentPropsTodo } from "../lib/componetts";
 
-interface ComponentProps {
-  id: number;
-  todo: string;
-  completedTask: boolean;
-}
 
-const Todo: React.FC<ComponentProps> = ({ id, todo, completedTask }) => {
+
+const Todo: React.FC<ComponentPropsTodo> = ({ id, todo, completedTask }) => {
   const [mouseOver, setMouseOver] = useState(false);
   const [styleTodosList, setStyleTodosList] = useState(false);
   const [valueInputField, setValueInputField] = useState(todo);

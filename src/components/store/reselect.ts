@@ -7,15 +7,15 @@ export const SelectActiveFilter = (state: RootState) => state.filters.filter;
 const selectTodosByFilter = createSelector(
   [SelectAllTodos, SelectActiveFilter],
   (allTodos, activeFilter) => {
-    if (activeFilter === "All") {
+    if (activeFilter === "all") {
       return allTodos;
     }
 
-    if (activeFilter === "Completed") {
+    if (activeFilter === "completed") {
       return allTodos.filter((todo) => todo.completed);
     }
 
-    if (activeFilter === "Active") {
+    if (activeFilter === "active") {
       return allTodos.filter((todo) => !todo.completed);
     }
     return []

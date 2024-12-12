@@ -22,8 +22,9 @@ const Registration = () => {
       password,
       dob,
     }));
+    // navigate("/todos");
   };
-  navigate("/todos");
+
   return (
     <FormSection>
       <h1>Регистрация</h1>

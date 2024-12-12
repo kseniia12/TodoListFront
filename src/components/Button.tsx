@@ -1,21 +1,17 @@
 import React from "react";
-import { useDispatch } from "react-redux";
-import { changeFilter } from "./store/filterSlice";
+import { useAppDispatch } from "../hooks";
 import cn from "classnames";
+import { thunkGetAllTodo } from "../components/store/thunkTodo";
+import { ButtonProps } from "../lib/componetts";
 
-interface IProps {
-  isAcctive: boolean;
-  filter: string;
-}
-
-const Button: React.FC<IProps> = ({ isAcctive, filter }) => {
-  const dispatch = useDispatch();
-
+const Button: React.FC<ButtonProps> = (props) => {
+  const {isActive, filter} = props
+  const dispatch = useAppDispatch();
   return (
     <button
-      className={cn({ "button-filter-activ": isAcctive })}
+      className={cn({ "button-filter-activ": isActive })}
       onClick={() => {
-        dispatch(changeFilter(filter));
+        dispatch(thunkGetAllTodo(filter ? filter : "all"));
       }}
     >
       {filter}

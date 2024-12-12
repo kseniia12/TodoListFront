@@ -1,31 +1,15 @@
-import constantForAxios from "../constant/constant";
+
 import { axiosDefault } from "../axiosDefault";
-import { IAxiosCompleted, IAxiosResDelete } from "../components/store/thunkTodo";
+import { responseObjectTodo } from "../lib/componetts";
 
-interface IAxiosPostRegistration {
-    text: string,
-    completed: boolean,
-}
 
-interface IAxiosEditTodo {
-    id: number,
-    valueInputField: string,
-}
-
-interface IAxiosResponse {
-    todo: {id: number; text: string, completed: boolean; valueInputField: string };
-}
-
-interface IAxiosDeleteTodoById {
-    id: number,
-}
 
 export const axiosCreateTodo = async ({
     text,
     completed
-}: IAxiosPostRegistration): Promise<IAxiosResponse> => {
+}: responseObjectTodo): Promise<responseObjectTodo> => {
     try {
-        const response = await axiosDefault.post<IAxiosResponse>(`http://localhost:4000/todos`, {
+        const response = await axiosDefault.post<responseObjectTodo>(`http://localhost:4000/todos`, {
             text,
             completed
         });
@@ -38,9 +22,9 @@ export const axiosCreateTodo = async ({
 export const axiosEditTodo = async ({
     id,
     valueInputField,
-}: IAxiosEditTodo): Promise<IAxiosResponse> => {
+}: responseObjectTodo): Promise<responseObjectTodo> => {
     try {
-        const response = await axiosDefault.patch<IAxiosResponse>(`http://localhost:4000/todos/${id}`, {
+        const response = await axiosDefault.patch<responseObjectTodo>(`http://localhost:4000/todos/${id}`, {
             valueInputField
         });
         return response.data;
@@ -52,9 +36,9 @@ export const axiosEditTodo = async ({
 export const axiosDeleteTodo = async ({
     id,
 
-}: IAxiosDeleteTodoById): Promise<IAxiosResDelete> => {
+}: responseObjectTodo): Promise<responseObjectTodo[]> => {
     try {
-        const response = await axiosDefault.delete<IAxiosResDelete>(`http://localhost:4000/todos/${id}`);
+        const response = await axiosDefault.delete<responseObjectTodo[]>(`http://localhost:4000/todos/${id}`);
         return response.data;
     } catch (error) {
         throw new Error("Request failed");
@@ -64,9 +48,9 @@ export const axiosDeleteTodo = async ({
 export const axiosCompletedTodo = async ({
     id,
     completed
-}: IAxiosCompleted): Promise<IAxiosResponse> => {
+}: responseObjectTodo): Promise<responseObjectTodo> => {
     try {
-        const response = await axiosDefault.patch<IAxiosResponse>(`http://localhost:4000/todos/${id}`, {
+        const response = await axiosDefault.patch<responseObjectTodo>(`http://localhost:4000/todos/${id}`, {
             completed
         });
         return response.data;
@@ -75,12 +59,35 @@ export const axiosCompletedTodo = async ({
     }
 };
 
-export const axiosGetAllCompleted = async (): Promise<IAxiosResDelete> => {
+export const axiosGetAllCompleted = async (filter: string):Promise<responseObjectTodo[]> => {
     try {
-        const response = await axiosDefault.get<IAxiosResDelete>(`http://localhost:4000/todos`);
+        const response = await axiosDefault.get<responseObjectTodo[]>('/todos', {
+            params: {filter}})
+
+        return response.data;
+      
+    } catch (error) {
+        throw new Error("Request failed");
+    }
+};
+
+export const axiosMarkAllCompleted = async (): Promise<responseObjectTodo[]> => {
+    try {
+        const response = await axiosDefault.patch<responseObjectTodo[]>(`http://localhost:4000/todos`);
         return response.data;
     } catch (error) {
         throw new Error("Request failed");
     }
 };
+
+export const axiosDelAllCompleted = async (): Promise<responseObjectTodo[]> => {
+    try {
+        const response = await axiosDefault.delete<responseObjectTodo[]>(`http://localhost:4000/todos`);
+        return response.data;
+    } catch (error) {
+        throw new Error("Request failed");
+    }
+};
+
+
 

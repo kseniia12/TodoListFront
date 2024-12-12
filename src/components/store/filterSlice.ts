@@ -1,17 +1,17 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 export interface IInitialState {
-  filter: string
+  filter:string;
 }
 const initialState: IInitialState = {
-  filter: "All",
+  filter: "all",
 }
 
 const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    changeFilter(state, action: PayloadAction<string>) {
+    changeFilter(state, action: PayloadAction<'all' | 'active' | 'completed'>) {
       state.filter = action.payload;
     },
   },

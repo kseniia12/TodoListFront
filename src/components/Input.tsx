@@ -1,9 +1,8 @@
 import React from "react";
 import { useState } from "react";
-import { markAllTasksCompleted } from "./store/todoSlice";
 import { useAppSelector, useAppDispatch } from "../hooks";
 import cn from "classnames";
-import { thunkCreateTodo } from "../components/store/thunkTodo";
+import { thunkCreateTodo, thunkMarkAllTasksCompletedTodo } from "./store/thunkTodo";
 const Input = () => {
   const [text, setTodo] = useState<string>("");
   const [completed] = useState<boolean>(false);
@@ -25,7 +24,7 @@ const Input = () => {
   };
 
   const markAllAsCompleted = () => {
-    dispatch(markAllTasksCompleted());
+    dispatch(thunkMarkAllTasksCompletedTodo());
   };
 
   const handleInputFocus = () => {
