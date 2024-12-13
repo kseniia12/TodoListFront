@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import Redirect from "react-router-dom";
 import InputRegistration from "./InputRegistration";
 import ButtonRegistration from "./ButtonRegistration";
-import { Form,  FormSection} from "../components/styles/style";
+import { Form, FormSection } from "../components/styles/style";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { thunkCreateUser } from "./store/thunk";
-import { useNavigate } from "react-router";
+import { redirect, useNavigate } from "react-router";
 
 const Registration = () => {
   const dispatch = useAppDispatch();
@@ -14,15 +15,19 @@ const Registration = () => {
   const [dob, setDob] = useState<string>("");
   const navigate = useNavigate();
   const users = useAppSelector((state) => state.users.loadingStatus);
+  const tok = localStorage.getItem("token");
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(thunkCreateUser({
-      fullName,
-      email,
-      password,
-      dob,
-    }));
-    // navigate("/todos");
+    dispatch(
+      thunkCreateUser({
+        fullName,
+        email,
+        password,
+        dob,
+      })
+    );
+    navigate("/todos");
   };
 
   return (
@@ -53,6 +58,7 @@ const Registration = () => {
           setFunction={setDob}
           f={dob}
         />
+        <a href="http://localhost:3000/auth/sign-in">Авторизация</a>
         <ButtonRegistration name={"Регистрация"} />
       </Form>
     </FormSection>

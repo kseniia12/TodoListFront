@@ -15,7 +15,7 @@ axiosDefault.interceptors.response.use(
     error => {
       if (error.response) {
         const status = error.response.status;
-        if (status === 401) {
+        if (status === 401 || status === 403) {
           localStorage.removeItem('token');
         } else {
           console.error('Ошибка ответа от сервера:', error.response.data);

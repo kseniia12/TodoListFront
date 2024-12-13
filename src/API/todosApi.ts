@@ -27,6 +27,7 @@ export const axiosEditTodo = async ({
         const response = await axiosDefault.patch<responseObjectTodo>(`http://localhost:4000/todos/${id}`, {
             valueInputField
         });
+
         return response.data;
     } catch (error) {
         throw new Error("Request failed");
@@ -61,11 +62,12 @@ export const axiosCompletedTodo = async ({
 
 export const axiosGetAllCompleted = async (filter: string):Promise<responseObjectTodo[]> => {
     try {
+        console.log("filter", filter)
         const response = await axiosDefault.get<responseObjectTodo[]>('/todos', {
             params: {filter}})
-
+            console.log("response.data", response.data)
         return response.data;
-      
+    
     } catch (error) {
         throw new Error("Request failed");
     }

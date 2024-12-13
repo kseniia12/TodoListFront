@@ -41,6 +41,9 @@ const Login = () => {
           setFunction={setPassword}
           f={password}
         />
+         <a href="http://localhost:3000/auth/sign-up">
+        Регистрация
+        </a>
         <ButtonRegistration name={"Авторизация"} />
       </Form>
     </FormSection>

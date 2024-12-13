@@ -24,7 +24,7 @@ const todoSlice = createSlice({
         if (index === -1) {
           return;
         }
-        state.todos[index].text = action.payload.valueInputField;
+        state.todos[index].text = action.payload.text;
         state.loadingStatus = 'succeeded';
       })
       .addCase(thunkDeleteTodo.fulfilled, (state, action) => {

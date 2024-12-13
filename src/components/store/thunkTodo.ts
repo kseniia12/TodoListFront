@@ -61,6 +61,7 @@ export const thunkGetAllTodo = createAsyncThunk<responseObjectTodo[], string>(
   'todos/getAllTodo',
   async (filter) => {
     const response = await axiosGetAllCompleted(filter);
+    console.log("response", response)
     return response;
   }
 );

@@ -11,7 +11,7 @@ const filterSlice = createSlice({
   name: "filter",
   initialState,
   reducers: {
-    changeFilter(state, action: PayloadAction<'all' | 'active' | 'completed'>) {
+    changeFilter(state, action) {
       state.filter = action.payload;
     },
   },
