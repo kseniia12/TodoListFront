@@ -1,49 +1,74 @@
 import constantForAxios from "../constant/constant";
 import { axiosDefault } from "../axiosDefault";
+import { IAxiosRes } from "../components/store/thunk";
+
 interface IAxiosPostLogin {
-    email: string;
-    password: string;
+  email: string;
+  password: string;
 }
 
 interface IAxiosPostRegistration {
-    fullName: string,
-    email: string,
-    password: string,
-    dob: string,
+  fullName: string,
+  email: string,
+  password: string,
+  dob: string,
 }
 
 interface IAxiosResponse {
-    token: string;
-    user: { id: number; fullName: string; email: string; dob: string; };
+  token: string;
+  user: { id: number; fullName: string; email: string; dob: string; };
 }
 
+
+
 export const axiosPostRegistrationUser = async ({
-    fullName,
-    email,
-    password,
-    dob
+  fullName,
+  email,
+  password,
+  dob
 }: IAxiosPostRegistration): Promise<IAxiosResponse> => {
-    try {
-        const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.registration, {
-            fullName,
-            email,
-            password,
-            dob
-        });
-        return response.data;
-    } catch (error) {
-        throw new Error("Request failed");
-    }
+  try {
+    const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.registration, {
+      fullName,
+      email,
+      password,
+      dob
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Request failed");
+  }
 };
 
 export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): Promise<IAxiosResponse> => {
-    try {
-        const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.login, {
-            email,
-            password,
-        });
-        return response.data;
-    } catch (error) {
-        throw new Error("Request failed");
-    }
+  try {
+    const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.login, {
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    throw new Error("Request failed");
+  }
 };
+
+export const axiosGetUser = async ({ token }: IAxiosRes): Promise<IAxiosPostRegistration> => {
+  try {
+    const response = await axiosDefault.get<IAxiosPostRegistration>(constantForAxios.getMe, 
+      {
+
+        headers: {
+        
+        Authorization: `Bearer ${token}`,
+        
+        },
+        
+        }
+    );
+    return response.data;
+  } catch (error) {
+    throw new Error("Request failed");
+  }
+};
+
+

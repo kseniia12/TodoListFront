@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import Redirect from "react-router-dom";
+import Redirect, { useNavigate } from "react-router-dom";
 import InputRegistration from "./InputRegistration";
 import ButtonRegistration from "./ButtonRegistration";
 import { Form, FormSection } from "../components/styles/style";
 import { useAppDispatch, useAppSelector } from "../hooks";
 import { thunkCreateUser } from "./store/thunk";
-import { redirect, useNavigate } from "react-router";
 
 const Registration = () => {
   const dispatch = useAppDispatch();
@@ -26,7 +25,7 @@ const Registration = () => {
         password,
         dob,
       })
-    );
+    )
     navigate("/todos");
   };
 
@@ -58,7 +57,7 @@ const Registration = () => {
           setFunction={setDob}
           f={dob}
         />
-        <a href="http://localhost:3000/auth/sign-in">Авторизация</a>
+        <a style={{marginLeft: "230px"}} href="http://localhost:3000/auth/sign-in">Авторизация</a>
         <ButtonRegistration name={"Регистрация"} />
       </Form>
     </FormSection>

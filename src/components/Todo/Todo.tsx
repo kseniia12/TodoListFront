@@ -1,9 +1,9 @@
 import React, { useState } from "react";
-import { TodoList } from "./styles/style";
-import { useAppDispatch } from "../hooks";
+import { TodoList } from "../styles/style";
+import { useAppDispatch } from "../../hooks";
 import cn from "classnames";
-import { thunkCompletedTodo, thunkDeleteTodo, thunkEditTodo } from "./store/thunkTodo";
-import { ComponentPropsTodo } from "../lib/componetts";
+import { thunkCompletedTodo, thunkDeleteTodo, thunkEditTodo } from "../store/thunkTodo";
+import { ComponentPropsTodo } from "../../lib/componetts";
 
 
 

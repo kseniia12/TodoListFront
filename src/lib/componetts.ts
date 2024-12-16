@@ -5,6 +5,10 @@ export interface ButtonProps {
     filter?: string;
 }
 
+export interface RouterProps {
+    token?: string | null;
+}
+
 export interface responseObjectTodo {
         id?: number; 
         text?: string; 
@@ -22,5 +26,5 @@ export interface ResponseArrayTodos {
 export interface ComponentPropsTodo {
     id: number;
     todo: string;
-    completedTask: boolean;
+    completedTask?: boolean;
   }

@@ -1,4 +1,4 @@
-import { axiosPostLoginUser, axiosPostRegistrationUser } from '../../API/auchAPI';
+import { axiosGetUser, axiosPostLoginUser, axiosPostRegistrationUser } from '../../API/auchAPI';
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
 interface IAxiosPostLogin {
@@ -16,6 +16,10 @@ interface IAxiosPostRegistration {
 interface IAxiosResponse {
   token: string;
   user: { id: number; fullName: string; email: string; dob: string; };
+}
+
+export interface IAxiosRes {
+  token: string | null;
 }
 
 export const thunkCreateUser = createAsyncThunk<IAxiosResponse, IAxiosPostRegistration>(
@@ -50,3 +54,14 @@ export const thunkLoginUser = createAsyncThunk<IAxiosResponse, IAxiosPostLogin>(
   }
 );
 
+export const thunkGetUser = createAsyncThunk<IAxiosPostRegistration, IAxiosRes>(
+  'users/dUser',
+  async ({
+   token,
+  }: IAxiosRes): Promise<IAxiosPostRegistration> => {
+    const response = await axiosGetUser({
+      token,
+    });
+    return response;
+  }
+);

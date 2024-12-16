@@ -1,14 +1,14 @@
 import React from "react";
 import { InputRegistrationUser } from "./styles/style";
 
-interface IInputRegistration{
+interface Props{
   type: string;
   placeholder: string;
   setFunction: (name: string) => void;
   f: string;
 }
 
-const InputRegistration: React.FC<IInputRegistration> = ({type, placeholder, setFunction, f}) => {
+const InputRegistration: React.FC<Props> = ({type, placeholder, setFunction, f}) => {
   return (
     <InputRegistrationUser
       className="input"

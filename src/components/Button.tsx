@@ -8,6 +8,7 @@ import { changeFilter } from "./store/filterSlice";
 const Button: React.FC<ButtonProps> = (props) => {
   const {isActive, filter} = props
   const dispatch = useAppDispatch();
+  
   return (
     <button
       className={cn({ "button-filter-activ": isActive,

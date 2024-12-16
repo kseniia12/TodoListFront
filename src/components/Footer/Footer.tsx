@@ -1,9 +1,9 @@
-import { useAppSelector, useAppDispatch } from "../hooks";
-import { StylesforFooter } from "./styles/style";
-import Button from "./Button";
+import { useAppSelector, useAppDispatch } from "../../hooks";
+
+import Button from "../Button";
 import cn from "classnames";
-import { thunkDelAllTasksCompletedTodo } from "./store/thunkTodo";
-// import { thunkDelAllTasksCompletedTodo } from "./store/thunkTodo";
+import { thunkDelAllTasksCompletedTodo } from "../store/thunkTodo";
+import { StylesforFooter } from "./style";
 
 const Footer = () => {
   const todos = useAppSelector((state) => state.todos.todos);

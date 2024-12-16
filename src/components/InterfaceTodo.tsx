@@ -1,9 +1,9 @@
 
-import Input from "./Input";
-import Todos from "./Todos";
+import Input from "./Input/Input";
+import Todos from "./Todos/Todos";
 import { StyleForAllProject } from "./styles/style";
 import GlobalStyles from "./styles/reset";
-import Footer from "./Footer";
+import Footer from "./Footer/Footer";
 export default function InterfaceTodo() {
   return (
     <div>

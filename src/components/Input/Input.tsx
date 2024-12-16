@@ -1,11 +1,10 @@
 import React from "react";
 import { useState } from "react";
-import { useAppSelector, useAppDispatch } from "../hooks";
+import { useAppSelector, useAppDispatch } from "../../hooks";
 import cn from "classnames";
-import { thunkCreateTodo, thunkMarkAllTasksCompletedTodo } from "./store/thunkTodo";
+import { thunkCreateTodo, thunkMarkAllTasksCompletedTodo } from "../store/thunkTodo";
 const Input = () => {
   const [text, setTodo] = useState<string>("");
-  const [completed] = useState<boolean>(false);
   const todos = useAppSelector((state) => state.todos.todos);
   const dispatch = useAppDispatch();
   const [isInputFocused, setIsInputFocused] = useState<boolean>(false);
@@ -16,7 +15,7 @@ const Input = () => {
       dispatch(
         thunkCreateTodo({
           text,
-          completed,
+          completed: false,
         })
       );
     }
@@ -35,6 +34,7 @@ const Input = () => {
     setIsInputFocused(false);
   };
 
+
   return (
     <>
       <h1 className="title">todos</h1>
@@ -49,7 +49,7 @@ const Input = () => {
             "activ-icon": todos.length,
             "no-activ-icon": !todos.length,
           })}
-          onClick={() => markAllAsCompleted()}
+          onClick={markAllAsCompleted}
         ></div>
         <form onSubmit={addTask}>
           <input
