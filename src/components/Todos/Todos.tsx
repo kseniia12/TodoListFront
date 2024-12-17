@@ -1,7 +1,8 @@
 import { useEffect } from "react";
 import Todo from "../Todo/Todo";
 import { useAppDispatch, useAppSelector } from "../../hooks";
-import { thunkGetAllTodo } from "../../store/thunkTodo";
+import { thunkGetAllTodo } from "../../store/thunk/thunkTodo";
+
 
 const Todos = () => {
   const todos = useAppSelector((state)=>state.todos.todos);

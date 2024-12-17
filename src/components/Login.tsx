@@ -24,14 +24,12 @@ const Login = () => {
       })
     )
     const token = localStorage.getItem('token');
-    const user = await dispatch(
+    await dispatch(
       thunkGetUser({
         token
       })
     )
-    console.log(user)
     navigate("/todos");
-    
   };
   return (
     <FormSection>

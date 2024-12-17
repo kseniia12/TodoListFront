@@ -2,15 +2,16 @@ import React, { useState } from "react";
 import InputRegistration from "./InputRegistration";
 import ButtonRegistration from "./ButtonRegistration";
 import { useAppDispatch } from "../hooks";
-import { thunkCreateUser } from "../store/thunk/thunkUser";
+import { thunkCreateUser, thunkGetUser } from "../store/thunk/thunkUser";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 const Registration = () => {
   const dispatch = useAppDispatch();
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [dob, setDob] = useState<string>("");
-
+  const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     dispatch(
@@ -21,6 +22,13 @@ const Registration = () => {
         dob,
       })
     );
+    const token = localStorage.getItem('token');
+    await dispatch(
+      thunkGetUser({
+        token
+      })
+    )
+    navigate("/todos");
   };
 
   return (
