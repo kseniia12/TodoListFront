@@ -1,9 +1,10 @@
 import React from "react";
-import { useAppDispatch } from "../hooks";
+import { useAppDispatch } from "../../hooks";
 import cn from "classnames";
-import { thunkGetAllTodo } from "../components/store/thunkTodo";
-import { ButtonProps } from "../lib/componetts";
-import { changeFilter } from "./store/filterSlice";
+
+import { ButtonProps } from "../../lib/componets";
+import { changeFilter } from "../../store/slice/filterSlice";
+import { thunkGetAllTodo } from "../../store/thunk/thunkTodo";
 
 const Button: React.FC<ButtonProps> = (props) => {
   const {isActive, filter} = props

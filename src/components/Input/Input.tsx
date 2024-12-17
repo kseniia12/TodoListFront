@@ -2,7 +2,8 @@ import React from "react";
 import { useState } from "react";
 import { useAppSelector, useAppDispatch } from "../../hooks";
 import cn from "classnames";
-import { thunkCreateTodo, thunkMarkAllTasksCompletedTodo } from "../store/thunkTodo";
+import { thunkCreateTodo, thunkMarkAllTasksCompletedTodo } from "../../store/thunk/thunkTodo";
+
 const Input = () => {
   const [text, setTodo] = useState<string>("");
   const todos = useAppSelector((state) => state.todos.todos);

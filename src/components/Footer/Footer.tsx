@@ -1,13 +1,13 @@
 import { useAppSelector, useAppDispatch } from "../../hooks";
-
-import Button from "../Button";
+import Button from "../ButtonFiltersTodos/ButtonFiltersTodos";
 import cn from "classnames";
-import { thunkDelAllTasksCompletedTodo } from "../store/thunkTodo";
 import { StylesforFooter } from "./style";
+import { thunkDelAllTasksCompletedTodo } from "../../store/thunk/thunkTodo";
 
 const Footer = () => {
   const todos = useAppSelector((state) => state.todos.todos);
   const filter = useAppSelector((state) => state.filters.filter);
+
   const dispatch = useAppDispatch();
 
   const completeTodos = todos.filter((todo) => todo.completed === true);
@@ -17,7 +17,7 @@ const Footer = () => {
     <StylesforFooter>
       <div> {uncompleteTodos.length} item left</div>
       <div className="buttons-filter">
-        <Button isActive={filter === "all"} filter="all"/>
+        <Button isActive={filter === "all"} filter="all" />
         <Button isActive={filter === "completed"} filter="completed" />
         <Button isActive={filter === "active"} filter="active" />
       </div>

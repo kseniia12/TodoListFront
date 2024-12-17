@@ -1,6 +1,8 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
-import { axiosCompletedTodo, axiosCreateTodo, axiosDelAllCompleted, axiosDeleteTodo, axiosEditTodo, axiosGetAllCompleted, axiosMarkAllCompleted,} from '../../API/todosApi';
-import { responseObjectTodo } from '../../lib/componetts';
+
+import { responseObjectTodo } from '../../lib/componets';
+import { axiosCompletedTodo, axiosCreateTodo, axiosDelAllCompleted, axiosDeleteTodo, axiosEditTodo, axiosGetAllCompleted, axiosMarkAllCompleted } from '../../API/todosApi';
+
 
 export const thunkCreateTodo = createAsyncThunk<responseObjectTodo, responseObjectTodo>(
   'todos/createTodo',

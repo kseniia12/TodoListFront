@@ -1,6 +1,6 @@
 import constantForAxios from "../constant/constant";
-import { axiosDefault } from "../axiosDefault";
-import { IAxiosRes } from "../components/store/thunk";
+import { axiosDefault } from "./axiosDefault";
+import { IAxiosRes, IResponse } from "../store/thunk/thunkUser";
 
 interface IAxiosPostLogin {
   email: string;
@@ -52,18 +52,14 @@ export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): 
   }
 };
 
-export const axiosGetUser = async ({ token }: IAxiosRes): Promise<IAxiosPostRegistration> => {
+export const axiosGetUser = async ({ token }: IAxiosRes): Promise<IResponse> => {
   try {
-    const response = await axiosDefault.get<IAxiosPostRegistration>(constantForAxios.getMe, 
+    const response = await axiosDefault.get<IResponse>(constantForAxios.getMe,
       {
-
         headers: {
-        
-        Authorization: `Bearer ${token}`,
-        
-        },
-        
+          Authorization: `Bearer ${token}`,
         }
+      }
     );
     return response.data;
   } catch (error) {

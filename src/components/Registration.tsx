@@ -1,20 +1,15 @@
-import React, { useState, useEffect } from "react";
-import Redirect, { useNavigate } from "react-router-dom";
+import React, { useState } from "react";
 import InputRegistration from "./InputRegistration";
 import ButtonRegistration from "./ButtonRegistration";
-import { Form, FormSection } from "../components/styles/style";
-import { useAppDispatch, useAppSelector } from "../hooks";
-import { thunkCreateUser } from "./store/thunk";
-
+import { useAppDispatch } from "../hooks";
+import { thunkCreateUser } from "../store/thunk/thunkUser";
+import styled from "styled-components";
 const Registration = () => {
   const dispatch = useAppDispatch();
   const [fullName, setFullName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [dob, setDob] = useState<string>("");
-  const navigate = useNavigate();
-  const users = useAppSelector((state) => state.users.loadingStatus);
-  const tok = localStorage.getItem("token");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -25,8 +20,7 @@ const Registration = () => {
         password,
         dob,
       })
-    )
-    navigate("/todos");
+    );
   };
 
   return (
@@ -37,30 +31,49 @@ const Registration = () => {
           type={"text"}
           placeholder={"Фамилия Имя Отчество"}
           setFunction={setFullName}
-          f={fullName}
+          text={fullName}
         />
         <InputRegistration
           type={"email"}
           placeholder={"Электронная почта"}
           setFunction={setEmail}
-          f={email}
+          text={email}
         />
         <InputRegistration
           type={"password"}
           placeholder={"Пароль"}
           setFunction={setPassword}
-          f={password}
+          text={password}
         />
         <InputRegistration
           type={"date"}
           placeholder={"Дата рождения"}
           setFunction={setDob}
-          f={dob}
+          text={dob}
         />
-        <a style={{marginLeft: "230px"}} href="http://localhost:3000/auth/sign-in">Авторизация</a>
+        <a
+          style={{ marginLeft: "230px" }}
+          href="http://localhost:3000/auth/sign-in"
+        >
+          Авторизация
+        </a>
         <ButtonRegistration name={"Регистрация"} />
       </Form>
     </FormSection>
   );
 };
 export default Registration;
+
+const FormSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;

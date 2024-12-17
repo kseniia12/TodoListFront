@@ -1,9 +1,10 @@
 import React from "react";
-// import { ButtonRegistrationAndLogin } from "./styles/style";
 import styled from "styled-components";
+
 interface IButtonRegistration {
   name: string;
 }
+
 const ButtonRegistration: React.FC<IButtonRegistration> = ({ name }) => {
   return (
     <StyledWrapper type="submit">
@@ -11,6 +12,7 @@ const ButtonRegistration: React.FC<IButtonRegistration> = ({ name }) => {
     </StyledWrapper>
   );
 };
+
 const StyledWrapper = styled.button`
   max-height: 30px;
   width: 150px;

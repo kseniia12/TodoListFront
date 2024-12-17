@@ -1,23 +1,36 @@
 import React from "react";
-import { InputRegistrationUser } from "./styles/style";
+import styled from "styled-components";
 
-interface Props{
+interface Props {
   type: string;
   placeholder: string;
   setFunction: (name: string) => void;
-  f: string;
+  text: string;
 }
 
-const InputRegistration: React.FC<Props> = ({type, placeholder, setFunction, f}) => {
+const InputRegistration: React.FC<Props> = ({
+  type,
+  placeholder,
+  setFunction,
+  text,
+}) => {
   return (
     <InputRegistrationUser
       className="input"
       type={type}
       placeholder={placeholder}
-      value={f}
+      value={text}
       onChange={(e) => setFunction(e.target.value)}
       required
     />
   );
 };
 export default InputRegistration;
+
+const InputRegistrationUser = styled.input`
+  max-height: 30px;
+  width: 300px;
+  padding: 10px;
+  background-color: #cbf1f5;
+  display: block;
+`;

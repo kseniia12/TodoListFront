@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import InputRegistration from "./InputRegistration";
 import ButtonRegistration from "./ButtonRegistration";
-import { thunkGetUser, thunkLoginUser } from "./store/thunk";
+import { thunkGetUser, thunkLoginUser } from "../store/thunk/thunkUser";
 import { useAppDispatch } from "../hooks";
-import { Form, FormSection } from "./styles/style";
 import { useNavigate } from "react-router-dom";
-
+import styled from "styled-components";
 
 const Login = () => {
   const [email, setEmail] = useState<string>("");
@@ -42,13 +41,13 @@ const Login = () => {
           type="email"
           placeholder="Электронная почта"
           setFunction={setEmail}
-          f={email}
+          text={email}
         />
         <InputRegistration
           type={"password"}
           placeholder={"Пароль"}
           setFunction={setPassword}
-          f={password}
+          text={password}
         />
          <a style={{marginLeft: "230px"}} href="http://localhost:3000/auth/sign-up">
         Регистрация
@@ -59,3 +58,17 @@ const Login = () => {
   );
 };
 export default Login;
+
+const FormSection = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 120px;
+`;
+
+const Form = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+`;
