@@ -1,7 +1,7 @@
 
 import { axiosDefault } from "./axiosDefault";
 import constantForAxios from "../constant/constant";
-import { responseObjectTodo } from "../lib/componets";
+import { responseObjectTodo } from "../lib/componetts";
 
 export const axiosCreateTodo = async ({
     text,
@@ -22,7 +22,6 @@ export const axiosEditTodo = async ({
     id,
     valueInputField,
 }: responseObjectTodo): Promise<responseObjectTodo> => {
-    console.log(constantForAxios.createTodo)
     try {
         const response = await axiosDefault.patch<responseObjectTodo>(`${constantForAxios.createTodo}/${id}`, {
             valueInputField
@@ -56,6 +55,7 @@ export const axiosCompletedTodo = async ({
             completed
         });
         return response.data;
+       
     } catch (error) {
         throw new Error("Request failed");
     }

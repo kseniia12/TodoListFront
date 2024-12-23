@@ -1,8 +1,8 @@
 import { SerializedError } from "@reduxjs/toolkit";
 
 export interface ButtonProps {
-    isActive?: boolean;
-    filter?: string;
+    className?:string;
+    filter: string;
 }
 
 export interface RouterProps {
@@ -17,6 +17,8 @@ export interface responseObjectTodo {
         key?: number;
 }
 
+export type propsTodo = Omit< responseObjectTodo, "id">
+
 export interface ResponseArrayTodos {
     todos: responseObjectTodo[];
     loadingStatus: string;
@@ -26,5 +28,5 @@ export interface ResponseArrayTodos {
 export interface ComponentPropsTodo {
     id: number;
     todo: string;
-    completedTask?: boolean;
+    completed?: boolean;
   }

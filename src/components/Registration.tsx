@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import InputRegistration from "./InputRegistration";
-import ButtonRegistration from "./ButtonRegistration";
+import Input from "./Input";
 import { useAppDispatch } from "../hooks";
-import { thunkCreateUser, thunkGetUser } from "../store/thunk/thunkUser";
+import { CommonButton } from "./Button";
+import { thunkCreateUser } from "../store/thunk/thunkUser";
 import styled from "styled-components";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 const Registration = () => {
   const dispatch = useAppDispatch();
   const [fullName, setFullName] = useState<string>("");
@@ -14,58 +14,67 @@ const Registration = () => {
   const navigate = useNavigate();
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    dispatch(
-      thunkCreateUser({
-        fullName,
-        email,
-        password,
-        dob,
-      })
-    );
-    const token = localStorage.getItem('token');
-    await dispatch(
-      thunkGetUser({
-        token
-      })
-    )
-    navigate("/todos");
+    try {
+      await dispatch(
+        thunkCreateUser({
+          fullName,
+          email,
+          password,
+          dob,
+        })
+      );
+      navigate("/todos");
+    } catch (error) {
+      console.error("Error login:", error)
+      navigate("/auth/sign-in");
+    }
+  };
+
+  const handleFullNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setFullName(e.target.value);
+  };
+  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+  };
+  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setPassword(e.target.value);
+  };
+  const handleDobChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setDob(e.target.value);
   };
 
   return (
     <FormSection>
       <h1>Регистрация</h1>
       <Form onSubmit={handleSubmit} className="form">
-        <InputRegistration
-          type={"text"}
-          placeholder={"Фамилия Имя Отчество"}
-          setFunction={setFullName}
-          text={fullName}
+        <Input
+          type="text"
+          placeholder="Фамилия Имя Отчество"
+          onChange={handleFullNameChange}
+          value={fullName}
         />
-        <InputRegistration
-          type={"email"}
-          placeholder={"Электронная почта"}
-          setFunction={setEmail}
-          text={email}
+        <Input
+          type="email"
+          placeholder="Электронная почта"
+          onChange={handleEmailChange}
+          value={email}
         />
-        <InputRegistration
-          type={"password"}
-          placeholder={"Пароль"}
-          setFunction={setPassword}
-          text={password}
+        <Input
+          type="password"
+          placeholder="Пароль"
+          onChange={handlePasswordChange}
+          value={password}
         />
-        <InputRegistration
-          type={"date"}
-          placeholder={"Дата рождения"}
-          setFunction={setDob}
-          text={dob}
+        <Input
+          type="date"
+          placeholder="Дата рождения"
+          onChange={handleDobChange}
+          value={dob}
         />
-        <a
-          style={{ marginLeft: "230px" }}
-          href="http://localhost:3000/auth/sign-in"
-        >
+        <Link className="auth-link" to="/auth/sign-in">
           Авторизация
-        </a>
-        <ButtonRegistration name={"Регистрация"} />
+        </Link>
+        <CommonButton>Регистрация</CommonButton>
       </Form>
     </FormSection>
   );
@@ -77,6 +86,9 @@ const FormSection = styled.div`
   flex-direction: column;
   align-items: center;
   margin-top: 120px;
+  .auth-link {
+    margin-left: "230px";
+  }
 `;
 
 const Form = styled.form`

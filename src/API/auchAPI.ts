@@ -19,8 +19,6 @@ interface IAxiosResponse {
   user: { id: number; fullName: string; email: string; dob: string; };
 }
 
-
-
 export const axiosPostRegistrationUser = async ({
   fullName,
   email,
@@ -46,6 +44,7 @@ export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): 
       email,
       password,
     });
+    console.log(response.data)
     return response.data;
   } catch (error) {
     throw new Error("Request failed");

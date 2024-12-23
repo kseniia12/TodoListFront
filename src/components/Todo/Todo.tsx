@@ -1,93 +1,59 @@
 import React, { useState } from "react";
-
 import { useAppDispatch } from "../../hooks";
-import cn from "classnames";
-
-import { ComponentPropsTodo } from "../../lib/componets";
-import { thunkCompletedTodo, thunkDeleteTodo, thunkEditTodo } from "../../store/thunk/thunkTodo";
+import { ComponentPropsTodo } from "../../lib/componetts";
+import {
+  thunkCompletedTodo,
+  thunkDeleteTodo,
+  thunkEditTodo,
+} from "../../store/thunk/thunkTodo";
 import { TodoList } from "./style";
+import Input from "../Input";
 
-
-
-const Todo: React.FC<ComponentPropsTodo> = ({ id, todo, completedTask }) => {
-  const [mouseOver, setMouseOver] = useState(false);
+const Todo: React.FC<ComponentPropsTodo> = ({ id, todo, completed }) => {
   const [styleTodosList, setStyleTodosList] = useState(false);
   const [valueInputField, setValueInputField] = useState(todo);
-  const [isInputFocused, setIsInputFocused] = useState(false);
   const dispatch = useAppDispatch();
-  let completed = !completedTask
-  const completeTask = (id: number) => {
-    dispatch(thunkCompletedTodo({id, completed}));
-  };
 
-  const deleteTask = (id: number) => {
-    dispatch(thunkDeleteTodo({id}));
-  };
+  const completeTask = (id: number) => dispatch(thunkCompletedTodo({ id, completed }));
+
+  const deleteTask = () => dispatch(thunkDeleteTodo({ id }));
+
+  const writeDownText = (e: React.ChangeEvent<HTMLInputElement>) => setValueInputField(e.target.value);
+
+  const chetoSubmit = () => completeTask(id);
 
   const handleDoubleClick = (
     e: React.MouseEvent<Element, MouseEvent>
   ): void => {
-    setMouseOver(false);
-    setIsInputFocused(true);
     e.preventDefault();
     setStyleTodosList(true);
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
-      setMouseOver(true);
       e.preventDefault();
       dispatch(thunkEditTodo({ id, valueInputField }));
-      setIsInputFocused(false);
       setStyleTodosList(false);
     }
   };
 
   return (
-    <TodoList
-      key={id}
-      onMouseEnter={() => setMouseOver(true)}
-      onMouseLeave={() => setMouseOver(false)}
-      onDoubleClick={handleDoubleClick}
-    >
-      <div
-        className={cn({
-          "strikethrough-text": completedTask,
-          "not-strikethrough-text": !completedTask,
-        })}
-      >
-        <div
-          className={cn({
-            "completed-task": completedTask,
-            "unfulfilled-task": !completedTask,
-          })}
-          onClick={() => completeTask(id)}
-        ></div>
-        {styleTodosList === true ? (
-          <input
-            key={id}
+    <TodoList completed={String(completed)} onDoubleClick={handleDoubleClick}>
+      <div className="text">
+        <div className="check-box" onClick={chetoSubmit}></div>
+        {styleTodosList ? (
+          <Input
             type="text"
             value={valueInputField}
-            onChange={(e) => setValueInputField(e.target.value)}
+            onChange={writeDownText}
             onKeyDown={handleKeyPress}
-            onMouseEnter={() => setMouseOver(false)}
-            className={`${
-              isInputFocused ? "activ-form-input" : "no-activ-form-input"
-            }`}
+            className="input-form"
           />
         ) : (
-          <div className="activ-todo">
-            <div key={id}>{todo}</div>
-          </div>
+          <div className="item">{todo}</div>
         )}
       </div>
-      <div
-        className={cn({
-          "no-activ-cross": !mouseOver,
-          "activ-cross": mouseOver,
-        })}
-        onClick={() => deleteTask(id)}
-      >
+      <div className="cross" onClick={deleteTask}>
         x
       </div>
     </TodoList>

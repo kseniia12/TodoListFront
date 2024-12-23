@@ -1,6 +1,5 @@
 import { useAppSelector, useAppDispatch } from "../../hooks";
-import Button from "../ButtonFiltersTodos/ButtonFiltersTodos";
-import cn from "classnames";
+import ButtonFiltersTodos from "../ButtonFiltersTodos/ButtonFiltersTodos";
 import { StylesforFooter } from "./style";
 import { thunkDelAllTasksCompletedTodo } from "../../store/thunk/thunkTodo";
 
@@ -13,20 +12,19 @@ const Footer = () => {
   const completeTodos = todos.filter((todo) => todo.completed === true);
   const uncompleteTodos = todos.filter((todo) => todo.completed === false);
 
+  const deleteAllCompletedTodo = () => dispatch(thunkDelAllTasksCompletedTodo());
+
   return (
-    <StylesforFooter>
+    <StylesforFooter numberCompletedTasks={completeTodos.length}>
       <div> {uncompleteTodos.length} item left</div>
-      <div className="buttons-filter">
-        <Button isActive={filter === "all"} filter="all" />
-        <Button isActive={filter === "completed"} filter="completed" />
-        <Button isActive={filter === "active"} filter="active" />
+      <div className="buttons">
+        <ButtonFiltersTodos  className={`${filter === 'all' ? 'button-filter' : ''}`} filter="all" />
+        <ButtonFiltersTodos className={`${filter === 'completed' ? 'button-filter' : ''}`} filter="completed" />
+        <ButtonFiltersTodos className={`${filter === 'active' ? 'button-filter' : ''}`} filter="active" />
       </div>
       <button
-        className={cn({
-          "button-clear-hidden": !completeTodos.length,
-          "button-clear-active": completeTodos.length,
-        })}
-        onClick={() => dispatch(thunkDelAllTasksCompletedTodo())}
+        className="button-clear-active-todos"
+        onClick={deleteAllCompletedTodo}
       >
         Clear Completed
       </button>

@@ -5,15 +5,15 @@ interface IButtonRegistration {
   name: string;
 }
 
-const ButtonRegistration: React.FC<IButtonRegistration> = ({ name }) => {
+const Button: React.FC<IButtonRegistration> = ({ name }) => {
   return (
-    <StyledWrapper type="submit">
+    <CommonButton type="submit">
       <div>{name}</div>
-    </StyledWrapper>
+    </CommonButton>
   );
 };
 
-const StyledWrapper = styled.button`
+export const CommonButton = styled.button`
   max-height: 30px;
   width: 150px;
   padding: 10px;
@@ -23,4 +23,4 @@ const StyledWrapper = styled.button`
   justify-content: center;
 `;
 
-export default ButtonRegistration;
+export default Button;

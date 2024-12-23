@@ -1,5 +1,5 @@
 import { Navigate, Outlet } from "react-router-dom";
-import { RouterProps } from "../lib/componets";
+import { RouterProps } from "../lib/componetts";
 import { useAppSelector } from "../hooks";
 
 const PrivatRouter: React.FC<RouterProps>  = () => {
