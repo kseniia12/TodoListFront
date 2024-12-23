@@ -1,6 +1,6 @@
 import React from "react";
 import { useAppDispatch } from "../../hooks";
-import { ButtonProps } from "../../lib/componetts";
+import { ButtonProps } from "../../lib/componets";
 import { changeFilter } from "../../store/slice/filterSlice";
 import { thunkGetAllTodo } from "../../store/thunk/thunkTodo";
 

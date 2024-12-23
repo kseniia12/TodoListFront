@@ -1,6 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { responseObjectTodo } from '../../lib/componetts';
+import { responseObjectTodo } from '../../lib/componets';
 import { axiosCompletedTodo, axiosCreateTodo, axiosDelAllCompleted, axiosDeleteTodo, axiosEditTodo, axiosGetAllCompleted, axiosMarkAllCompleted } from '../../API/todosApi';
 
 

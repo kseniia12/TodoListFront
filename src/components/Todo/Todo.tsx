@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useAppDispatch } from "../../hooks";
-import { ComponentPropsTodo } from "../../lib/componetts";
+import { ComponentPropsTodo } from "../../lib/componets";
 import {
   thunkCompletedTodo,
   thunkDeleteTodo,

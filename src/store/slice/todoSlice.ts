@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-import { ResponseArrayTodos } from "../../lib/componetts";
+import { ResponseArrayTodos } from "../../lib/componets";
 import { thunkCompletedTodo, thunkCreateTodo, thunkDelAllTasksCompletedTodo, thunkDeleteTodo, thunkEditTodo, thunkGetAllTodo, thunkMarkAllTasksCompletedTodo } from "../thunk/thunkTodo";
 
 const initialState: ResponseArrayTodos = {

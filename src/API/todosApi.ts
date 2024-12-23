@@ -1,7 +1,7 @@
 
 import { axiosDefault } from "./axiosDefault";
 import constantForAxios from "../constant/constant";
-import { responseObjectTodo } from "../lib/componetts";
+import { responseObjectTodo } from "../lib/componets";
 
 export const axiosCreateTodo = async ({
     text,
