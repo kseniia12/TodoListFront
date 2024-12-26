@@ -1,30 +1,6 @@
-import { axiosGetUser, axiosPostLoginUser, axiosPostRegistrationUser } from '../../API/auchAPI';
+import { axiosGetUser, axiosPostLoginUser, axiosPostRegistrationUser } from '../../API/authApi';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-interface IAxiosPostLogin {
-  email: string;
-  password: string;
-}
-
-interface IAxiosPostRegistration {
-  fullName: string,
-  email: string,
-  password: string,
-  dob: string,
-}
-
-export interface IResponse {
-  user: { id: number; fullName: string; email: string; dob: string; };
-}
-
-interface IAxiosResponse {
-  token: string;
-  user: { id: number; fullName: string; email: string; dob: string; };
-}
-
-export interface IAxiosRes {
-  token: string | null;
-}
+import { IAxiosPostLogin, IAxiosPostRegistration, IAxiosResponse, IResponse, RouterProps } from '../../lib/componets';
 
 export const thunkCreateUser = createAsyncThunk<IAxiosResponse, IAxiosPostRegistration>(
   'users/createUser',
@@ -40,6 +16,7 @@ export const thunkCreateUser = createAsyncThunk<IAxiosResponse, IAxiosPostRegist
       password,
       dob
     });
+    localStorage.setItem('token', response.token);
     return response;
   }
 );
@@ -54,15 +31,16 @@ export const thunkLoginUser = createAsyncThunk<IAxiosResponse, IAxiosPostLogin>(
       email,
       password,
     });
+    localStorage.setItem('token', response.token);
     return response;
   }
 );
 
-export const thunkGetUser = createAsyncThunk<IResponse, IAxiosRes>(
+export const thunkGetUser = createAsyncThunk<IResponse, RouterProps>(
   'users/dUser',
   async ({
    token,
-  }: IAxiosRes): Promise<IResponse> => {
+  }: RouterProps): Promise<IResponse> => {
     const response = await axiosGetUser({
       token,
     });

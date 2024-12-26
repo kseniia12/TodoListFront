@@ -1,15 +1,22 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 
-import { responseObjectTodo } from '../../lib/componets';
-import { axiosCompletedTodo, axiosCreateTodo, axiosDelAllCompleted, axiosDeleteTodo, axiosEditTodo, axiosGetAllCompleted, axiosMarkAllCompleted } from '../../API/todosApi';
+import { createTodo, responseObjectTodo } from '../../lib/componets';
+import {
+  axiosCompletedTodo,
+  axiosCreateTodo,
+  axiosDelAllCompleted,
+  axiosDeleteTodo,
+  axiosEditTodo,
+  axiosGetAllCompleted,
+  axiosMarkAllCompleted
+} from '../../API/todosApi';
 
-
-export const thunkCreateTodo = createAsyncThunk<responseObjectTodo, responseObjectTodo>(
+export const thunkCreateTodo = createAsyncThunk<createTodo, createTodo>(
   'todos/createTodo',
   async ({
     text,
     completed
-  }: responseObjectTodo): Promise<responseObjectTodo> => {
+  }: createTodo): Promise<createTodo> => {
     const response = await axiosCreateTodo({
       text,
       completed,
@@ -32,7 +39,7 @@ export const thunkEditTodo = createAsyncThunk<responseObjectTodo, responseObject
   }
 );
 
-export const thunkDeleteTodo = createAsyncThunk<responseObjectTodo[], {id: number}>(
+export const thunkDeleteTodo = createAsyncThunk<responseObjectTodo[], { id: number | string }>(
   'todos/deleteTodo',
   async ({
     id,

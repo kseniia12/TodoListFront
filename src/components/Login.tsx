@@ -26,8 +26,7 @@ const Login = () => {
       ).unwrap();
       navigate("/todos");
     } catch (error) {
-      console.error("Error login:", error)
-      navigate("/auth/sign-in");
+      
     }
   };
   const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -75,6 +74,6 @@ const Form = styled.form`
   align-items: center;
   gap: 20px;
   .button {
-    margin-left: "230px";
+    margin-left: "500px";
   }
 `;

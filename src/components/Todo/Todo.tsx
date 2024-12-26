@@ -14,13 +14,15 @@ const Todo: React.FC<ComponentPropsTodo> = ({ id, todo, completed }) => {
   const [valueInputField, setValueInputField] = useState(todo);
   const dispatch = useAppDispatch();
 
-  const completeTask = (id: number) => dispatch(thunkCompletedTodo({ id, completed }));
+  const completeTask = (id: number) =>
+    dispatch(thunkCompletedTodo({ id, completed }));
 
   const deleteTask = () => dispatch(thunkDeleteTodo({ id }));
 
-  const writeDownText = (e: React.ChangeEvent<HTMLInputElement>) => setValueInputField(e.target.value);
+  const writeDownText = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setValueInputField(e.target.value);
 
-  const chetoSubmit = () => completeTask(id);
+  const chetoSubmit = () => completeTask(id as number);
 
   const handleDoubleClick = (
     e: React.MouseEvent<Element, MouseEvent>
@@ -30,7 +32,7 @@ const Todo: React.FC<ComponentPropsTodo> = ({ id, todo, completed }) => {
   };
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === "Enter") {
+    if (e.key === "Escape") {
       e.preventDefault();
       dispatch(thunkEditTodo({ id, valueInputField }));
       setStyleTodosList(false);

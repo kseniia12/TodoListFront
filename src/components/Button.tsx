@@ -17,7 +17,6 @@ export const CommonButton = styled.button`
   max-height: 30px;
   width: 150px;
   padding: 10px;
-  background-color: #a3d2d6;
   display: flex;
   align-items: center;
   justify-content: center;

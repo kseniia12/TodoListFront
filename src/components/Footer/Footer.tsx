@@ -12,15 +12,25 @@ const Footer = () => {
   const completeTodos = todos.filter((todo) => todo.completed === true);
   const uncompleteTodos = todos.filter((todo) => todo.completed === false);
 
-  const deleteAllCompletedTodo = () => dispatch(thunkDelAllTasksCompletedTodo());
+  const deleteAllCompletedTodo = () =>
+    dispatch(thunkDelAllTasksCompletedTodo());
 
   return (
     <StylesforFooter numberCompletedTasks={completeTodos.length}>
       <div> {uncompleteTodos.length} item left</div>
       <div className="buttons">
-        <ButtonFiltersTodos  className={`${filter === 'all' ? 'button-filter' : ''}`} filter="all" />
-        <ButtonFiltersTodos className={`${filter === 'completed' ? 'button-filter' : ''}`} filter="completed" />
-        <ButtonFiltersTodos className={`${filter === 'active' ? 'button-filter' : ''}`} filter="active" />
+        <ButtonFiltersTodos
+          className={`${filter === "all" ? "button-filter" : ""}`}
+          filter="all"
+        />
+        <ButtonFiltersTodos
+          className={`${filter === "completed" ? "button-filter" : ""}`}
+          filter="completed"
+        />
+        <ButtonFiltersTodos
+          className={`${filter === "active" ? "button-filter" : ""}`}
+          filter="active"
+        />
       </div>
       <button
         className="button-clear-active-todos"

@@ -1,4 +1,3 @@
-
 import Input from "../Input/Input";
 import Todos from "../Todos/Todos";
 import GlobalStyles from "../styles/reset";

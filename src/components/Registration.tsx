@@ -15,17 +15,18 @@ const Registration = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
-      await dispatch(
+     const user = await dispatch(
         thunkCreateUser({
           fullName,
           email,
           password,
           dob,
         })
-      );
-      navigate("/todos");
+      ).unwrap();
+      if (user){
+        navigate("/todos");
+      }
     } catch (error) {
-      console.error("Error login:", error)
       navigate("/auth/sign-in");
     }
   };
