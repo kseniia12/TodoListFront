@@ -8,7 +8,7 @@ export const axiosPostRegistrationUser = async ({
   password,
   dob
 }: IAxiosPostRegistration): Promise<IAxiosResponse> => {
-  const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.registration, {
+  const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.SIGN_UP, {
     fullName,
     email,
     password,
@@ -18,7 +18,7 @@ export const axiosPostRegistrationUser = async ({
 };
 
 export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): Promise<IAxiosResponse> => {
-  const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.login, {
+  const response = await axiosDefault.post<IAxiosResponse>(constantForAxios.SIGN_IN, {
     email,
     password,
   });
@@ -26,7 +26,7 @@ export const axiosPostLoginUser = async ({ email, password }: IAxiosPostLogin): 
 };
 
 export const axiosGetUser = async ({ token }: IAxiosRes): Promise<IResponse> => {
-  const response = await axiosDefault.get<IResponse>(constantForAxios.getMe,
+  const response = await axiosDefault.get<IResponse>(constantForAxios.GET_ME,
     {
       headers: {
         Authorization: `Bearer ${token}`,

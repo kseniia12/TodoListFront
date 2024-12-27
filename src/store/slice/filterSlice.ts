@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 export interface IInitialState {
-  filter:string;
+  filter: string;
 }
 const initialState: IInitialState = {
   filter: "all",

@@ -3,16 +3,16 @@ import Login from "./components/Login";
 import { BrowserRouter, Route, Routes } from "react-router";
 import PrivateRouter from "./utils/PrivateRouter";
 import InterfaceTodo from "./components/interfaceTodo/InterfaceTodo";
-
+import constantForAxios from "./constant/constant";
 const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/auth/sign-up" element={<Registration />} />
-        <Route path="/auth/sign-in" element={<Login />} />
+        <Route path={`${constantForAxios.SIGN_UP}`} element={<Registration />} />
+        <Route path={`${constantForAxios.SIGN_IN}`} element={<Login />} />
         <Route element={<PrivateRouter />}>
           <Route
-            path="/todos"
+            path={`${constantForAxios.TODO}`}
             element={
               <div className="App">
                 <InterfaceTodo />
@@ -25,9 +25,4 @@ const App = () => {
   );
 };
 
-const APP_ROUTES = {
-  signUp: 'auth/sign-up',
-
-}
- 
 export default App;

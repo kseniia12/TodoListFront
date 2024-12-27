@@ -33,8 +33,7 @@ const Input: React.FC<Props> = ({
 export default Input;
 
 const InputRegistrationUser = styled.input`
-  max-height: 30px;
   padding: 20px;
-  width: 300px;
+  width: 457px;
   display: block;
 `;

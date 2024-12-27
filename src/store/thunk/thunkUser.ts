@@ -39,7 +39,7 @@ export const thunkLoginUser = createAsyncThunk<IAxiosResponse, IAxiosPostLogin>(
 export const thunkGetUser = createAsyncThunk<IResponse, RouterProps>(
   'users/dUser',
   async ({
-   token,
+    token,
   }: RouterProps): Promise<IResponse> => {
     const response = await axiosGetUser({
       token,

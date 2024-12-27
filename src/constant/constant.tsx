@@ -1,8 +1,8 @@
 const constantForAxios = {
-    login: "/auth/sign-in",
-    registration: "/auth/sign-up",
-    createTodo: "/todos",
-    getMe: "/users/me"
+    SIGN_IN: "/auth/sign-in",
+    SIGN_UP: "/auth/sign-up",
+    TODO: "/todos",
+    GET_ME: "/users/me"
   } as const;
 
 export default constantForAxios;

@@ -7,7 +7,6 @@ export const axiosDefault = axios.create({
   }
 });
 
-
 axiosDefault.interceptors.response.use(
   response => {
     return response;

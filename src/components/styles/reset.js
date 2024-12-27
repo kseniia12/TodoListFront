@@ -12,7 +12,6 @@ export default createGlobalStyle`
 	box-sizing: border-box;
 }
 
-
 footer, section, main {
 	display: block;
 }
@@ -63,4 +62,3 @@ label {
   font: 14px 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 `;
-

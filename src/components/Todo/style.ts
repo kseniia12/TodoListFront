@@ -33,6 +33,7 @@ export const TodoList = styled.div<{ completed: string }>`
 
   .check-box {
     height: 30px;
+    max-width: 100%;
     width: 30px;
     border-radius: 50%;
     border: ${({ completed }) => completed === "true" ? `0.4px solid green` : `0.4px solid #484848`};
@@ -57,8 +58,12 @@ export const TodoList = styled.div<{ completed: string }>`
   }
 
   .input-form{
+    display: flex;
+    align-items: center;
+    height: 58.8px;
+    width: 100%;
+    justify-content: space-between;
     border: 1px solid red;
-    width: 680px;
-    height: 57px;
+    
   }
 `;

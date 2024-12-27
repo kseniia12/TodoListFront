@@ -28,16 +28,14 @@ const Input = () => {
 
   const markAllAsCompleted = () => dispatch(thunkMarkAllTasksCompletedTodo());
 
-  const writeTextFormInput = (e: React.ChangeEvent<HTMLInputElement>) => setTodo(e.target.value);
+  const writeTextFormInput = (e: React.ChangeEvent<HTMLInputElement>) =>
+    setTodo(e.target.value);
 
   return (
-    <StyleInput lengthTodo={todos.length} >
+    <StyleInput lengthTodo={todos.length}>
       <h1 className="title">todos</h1>
       <div className="section">
-        <div
-          className="icon"
-          onClick={markAllAsCompleted}
-        ></div>
+        <div className="icon" onClick={markAllAsCompleted}></div>
         <form onSubmit={addTask}>
           <InputRegistration
             className="input"

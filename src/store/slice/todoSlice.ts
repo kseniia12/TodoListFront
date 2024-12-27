@@ -16,14 +16,6 @@ const initialState: ResponseArrayTodos = {
   previousTodos: []
 }
 
-export interface responseObjectTodo {
-  id?: number;
-  text?: string;
-  completed?: boolean;
-  valueInputField?: string;
-  key?: number;
-}
-
 const todoSlice = createSlice({
   name: "todos",
   initialState,
@@ -48,7 +40,7 @@ const todoSlice = createSlice({
         }
       })
       .addCase(thunkEditTodo.pending, (state, action) => {
-         state.previousTodos = [...state.todos];
+        state.previousTodos = [...state.todos];
         const index = state.todos.findIndex((todo) => todo.id === action.meta.arg.id);
         state.todos[index] = {
           id: action.meta.arg.id,
